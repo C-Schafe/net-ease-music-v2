@@ -1,0 +1,1 @@
+import adminCss from '../css/admin.scss'

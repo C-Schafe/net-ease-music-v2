@@ -27,14 +27,56 @@
         }
 
     </style>
+    <!--<link rel="stylesheet" href="../css/admin.scss">-->
 </head>
 <body>
-    <div id="yyy">
-        <span id="xxx">上传文件</span>
-        <p id="state"></p>
+    <div class="dash-board">
+        <header>
+            <div class="buttons">
+                <span>red</span>
+                <span>yellow</span>
+                <span>green</span>
+            </div>
+        </header>
+        <aside>
+            <div class="songList-container">
+                <ul class="song-list">
+                    <li>远走高飞</li>
+                    <li>远走高飞</li>
+                    <li>远走高飞</li>
+                    <li>远走高飞</li>
+                    <li>远走高飞</li>
+                </ul>
+            </div>
+            <div id="upload-song">
+                <span id="upload-button">上传文件</span>
+                <p id="state"></p>
+            </div>
+        </aside>
+        <main>
+            <div class="home-page">
+                <div class="swiper">轮播图</div>
+                <div class="welcome-words">
+                    <div class="logo">
+                        logo
+                    </div>
+                    <p>欢迎使用网易云音乐后台管理系统！</p>
+                </div>
+            </div>
+            <div class="info-page">
+
+            </div>
+            <div class="new-song-detail">
+
+            </div>
+            <div class="upload-song">
+
+            </div>
+        </main>
     </div>
 
-	<script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+
+	<script src="../../node_modules/leancloud-storage/dist/av-min.js"></script>
 	<script>
 		var APP_ID = 'sm1o9As93aAVbtgzgMXkHJzh-gzGzoHsz';
 		var APP_KEY = '186bhesUrwc4H0RMtXrIv9S8';
@@ -58,14 +100,14 @@
 		//   alert('LeanCloud Rocks!');
 		// })
 	</script>
-    <script src="../vendors/moxie.js"></script>
-    <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
-    <script src="../node_modules/plupload/js/plupload.min.js"></script>
+    <script src="../../vendors/moxie.js"></script>
+    <script src="../../node_modules/qiniu-js/dist/qiniu.min.js"></script>
+    <script src="../../node_modules/plupload/js/plupload.min.js"></script>
 	<script>
         var uploader = Qiniu.uploader({
             disable_statistics_report: false,   // 禁止自动发送上传统计信息到七牛，默认允许发送
             runtimes: 'html5',      // 上传模式,依次退化
-            browse_button: 'xxx',         // 上传选择的点选按钮，**必需**
+            browse_button: 'upload-button',         // 上传选择的点选按钮，**必需**
             // 在初始化时，uptoken, uptoken_url, uptoken_func 三个参数中必须有一个被设置
             // 切如果提供了多个，其优先级为 uptoken > uptoken_url > uptoken_func
             // 其中 uptoken 是直接提供上传凭证，uptoken_url 是提供了获取上传凭证的地址，如果需要定制获取 uptoken 的过程则可以设置 uptoken_func
@@ -84,7 +126,7 @@
             //pfk6bv9od.bkt.clouddn.com
             max_file_size: '40mb',             // 最大文件体积限制
             dragdrop: true,                     // 开启可拖曳上传
-            drop_element: 'yyy',          // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
+            drop_element: 'upload-song',          // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
             auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
             //x_vars : {
             //    自定义变量，参考http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html
@@ -135,5 +177,6 @@
             }
         });
     </script>
+    <script src="/admin.js"></script>
 </body>
 </html>
