@@ -6,8 +6,17 @@ let HtmlWebpackPlugin = require('html-webpack-plugin'); // 添加在这里
 module.exports = {
     devtool: "source-map",
     entry: {
-        songDetail: './src/js/song-detail.js',
-        admin: './src/js/admin.js'
+        admin: './src/js/admin.js',
+        avMin: './src/js/vendors/av-min.js',
+        moxie: './src/js/vendors/moxie.js',
+        qiniuMin: './src/js/vendors/qiniu.min.js',
+        plupLoadMin: './src/js/vendors/plupload.min.js',
+        eventHub: './src/js/event-hub.js',
+        newSong: './src/js/new-song.js',
+        songForm: './src/js/song-form.js',
+        songList: './src/js/song-list.js',
+        uploadSong: './src/js/upload-song.js',
+        av: './src/js/av.js'
     },
     output: {
         filename: '[name].js',
@@ -17,7 +26,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         host: 'localhost',
-        port: 8080
+        port: 9000
     },
     plugins:[
         new WebpackNotifierPlugin({

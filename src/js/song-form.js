@@ -39,19 +39,46 @@ console.log('song form');
             placeholders.map((string)=>{
                 htmlString = htmlString.replace(`__${string}__`, data[string] || '')
             })
-            console.log('--------data--------');
-            console.log(data);
-            console.log(htmlString);
             $(this.el).html(htmlString)
+        },
+        reset(){
+            this.render({})
         }
     }
-    let model = {}
+    let model = {
+        data: { name:'',singer:'',url:'',id:''},
+        create(data){
+            // 声明类型
+            let Song = AV.Object.extend('Song');
+            // 新建对象
+            let song = new Song();
+            // 设置名称
+            song.set('name', data.name);
+            // 设置优先级
+            song.set('singer',data.singer);
+            song.set('url',data.url);
+            return song.save().then((res)=>{
+                console.log(res);
+                let {id, attributes} = res
+                console.log(id,attributes)
+                Object.assign(this.data, {
+                    id,
+                    name: attributes.name,
+                    singer: attributes.singer,
+                    url: attributes.url
+                })
+            }, (error)=>{
+                console.error(error);
+            });
+        }
+    }
     let controller = {
         init(view, model){
             this.view = view
             this.model = model
             this.view.render(this.model.data)
-            console.log('song-form eventHub前打印的数据');
+            console.log('bindEvents打印的数据');
+            this.bindEvents()
             window.eventHub.on('upload', (data)=>{
                 console.log('song-form打印的数据');
                 console.log(data);
@@ -60,6 +87,24 @@ console.log('song form');
         },
         reset(data){
             this.view.render(data)
+        },
+        bindEvents(){
+            console.log($(this.view.el));
+            $(this.view.el).on('submit', 'form', (e)=>{
+                e.preventDefault()
+                console.log('想要保存数据?');
+                let needs = 'name singer url'.split(' ')
+                let data = {}
+                needs.map((item)=>{
+                    data[item] = $(this.view.el).find(`[name=${item}]`).val()
+                })
+                this.model.create(data).then(()=>{
+                    this.view.reset()
+                    let newSong = JSON.parse(JSON.stringify(this.model.data))
+                    console.log(newSong);
+                    window.eventHub.emit('save', newSong)
+                })
+            })
         }
     }
     controller.init(view, model)
