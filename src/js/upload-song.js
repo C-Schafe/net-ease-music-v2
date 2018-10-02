@@ -2,9 +2,21 @@ console.log('upload song');
 
 {
     let view = {
-        el: $('#upload-song'),
+        el: $('.upload-song'),
+        template:`
+            <h3>上传歌曲</h3>
+            <div id="upload-song-area">
+                拖曳歌曲到此处或点击 "选择文件" 上传歌曲
+            </div>
+            <div class="upload-button-wrapper">
+                <span id="upload-button">选择文件</span>
+            </div>
+        `,
         find(selector){
             return this.el.find(selector)[0]
+        },
+        render(data){
+            this.el.append(this.template)
         }
     }
     let model = {}
@@ -12,7 +24,10 @@ console.log('upload song');
         init(view, data){
             this.view = view
             this.model = model
+            this.view.render()
+            this.bindEventHub()
         },
+        //初始化七牛上传歌曲功能
         initQiniu(){
             var uploader = Qiniu.uploader({
                 disable_statistics_report: false,   // 禁止自动发送上传统计信息到七牛，默认允许发送
@@ -65,7 +80,6 @@ console.log('upload song');
                     },
                     'FileUploaded': function(up, file, info) {
                         // 每个文件上传成功后,处理相关的事情
-
                         // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
                         // {
                         //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
@@ -94,7 +108,16 @@ console.log('upload song');
                     }
                 }
             });
+        },
+        bindEventHub(){
+            window.eventHub.on('new', ()=>{
+                $(this.view.el).removeClass('hide')
+            })
+            window.eventHub.on('upload', ()=>{
+                $(this.view.el).addClass('hide')
+            })
         }
+
     }
     controller.init(view,model)
     controller.initQiniu()

@@ -17,7 +17,8 @@ module.exports = {
         songList: './src/js/song-list.js',
         uploadSong: './src/js/upload-song.js',
         av: './src/js/av.js',
-        svg: './src/assets/svg.js'
+        svg: './src/assets/svg.js',
+        header: './src/js/header.js'
     },
     output: {
         filename: '[name].js',

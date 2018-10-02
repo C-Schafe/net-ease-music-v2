@@ -8,12 +8,38 @@ console.log('song list');
             <ul class="song-list"></ul>
         `,
         render(data){
-            console.log('song list的render执行');
-            console.log(data);
             let {songs} = data
             $(this.el).html(this.template)
             songs.map((song)=>{
-                $(this.el).find('.song-list').append(`<li>${song.name}</li>`)
+                $(this.el).find('.song-list').append(`
+                    <li class="active">
+                        <a href="#">
+                            <svg class="icon play" aria-hidden="true">
+                                <use xlink:href="#icon-play2"></use>
+                            </svg>
+                        </a>
+                        <div class="song">
+                            <div class="li-song-info">
+                                <svg class="icon name" aria-hidden="true">
+                                    <use xlink:href="#icon-name"></use>
+                                </svg>
+                                <span class="song-name">${song.name}</span>
+                                <svg class="icon singer" aria-hidden="true">
+                                    <use xlink:href="#icon-singer"></use>
+                                </svg>
+                                <span class="song-singer">${song.singer}</span>
+                            </div>
+                            <div class="li-song-actions">
+                                <svg class="icon edit" aria-hidden="true">
+                                    <use xlink:href="#icon-edit"></use>
+                                </svg>
+                                <svg class="icon delete" aria-hidden="true">
+                                    <use xlink:href="#icon-delete"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </li>
+                `)
             })
         }
     }
@@ -24,6 +50,7 @@ console.log('song list');
         find(){
             let query = new AV.Query('Song')
             return query.find().then((songs)=>{
+                //songs是所有歌曲，是一个数组，下面从数组每一项的对象中获取歌曲数据
                 songs.map((song)=>{
                     let songData = {
                         id: song.id,
@@ -37,7 +64,7 @@ console.log('song list');
         }
     }
     let controller = {
-        init(view,data){
+        init(view,model){
             this.view = view
             this.model = model
             this.view.render(this.model.data)
