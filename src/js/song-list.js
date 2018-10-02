@@ -3,7 +3,10 @@ console.log('song list');
 {
     let view = {
         el: '.songList-container',
-        template: `<ul class="song-list"></ul>`,
+        template: `
+            <h3>歌曲列表</h3>
+            <ul class="song-list"></ul>
+        `,
         render(data){
             console.log('song list的render执行');
             console.log(data);

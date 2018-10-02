@@ -16,7 +16,8 @@ module.exports = {
         songForm: './src/js/song-form.js',
         songList: './src/js/song-list.js',
         uploadSong: './src/js/upload-song.js',
-        av: './src/js/av.js'
+        av: './src/js/av.js',
+        svg: './src/assets/svg.js'
     },
     output: {
         filename: '[name].js',
@@ -84,7 +85,7 @@ module.exports = {
                     loader:'url-loader',
                     options: {
                         limit:8192,
-                        name:'../images/[hash:8].[name].[ext]'
+                        name:'../assets/[hash:8].[name].[ext]'
                     }
                 },{
                     loader: 'image-webpack-loader',// 压缩图片

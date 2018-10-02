@@ -80,8 +80,7 @@ console.log('song form');
             console.log('bindEvents打印的数据');
             this.bindEvents()
             window.eventHub.on('upload', (data)=>{
-                console.log('song-form打印的数据');
-                console.log(data);
+                console.log('song-form接收到上传歌曲的信息并重新渲染form内容');
                 this.reset(data)
             })
         },
@@ -92,7 +91,6 @@ console.log('song form');
             console.log($(this.view.el));
             $(this.view.el).on('submit', 'form', (e)=>{
                 e.preventDefault()
-                console.log('想要保存数据?');
                 let needs = 'name singer url'.split(' ')
                 let data = {}
                 needs.map((item)=>{

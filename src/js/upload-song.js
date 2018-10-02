@@ -36,7 +36,7 @@ console.log('upload song');
                 //pfk6bv9od.bkt.clouddn.com
                 max_file_size: '40mb',             // 最大文件体积限制
                 dragdrop: true,                     // 开启可拖曳上传
-                drop_element: this.view.find('#upload-song'),          // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
+                drop_element: this.view.find('#upload-song-area'),          // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
                 auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
                 //x_vars : {
                 //    自定义变量，参考http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html
@@ -61,11 +61,11 @@ console.log('upload song');
                         // 每个文件上传前,处理相关的事情
                     },
                     'UploadProgress': function(up, file) {
-                        state.textContent = "上传中"
+
                     },
                     'FileUploaded': function(up, file, info) {
                         // 每个文件上传成功后,处理相关的事情
-                        state.textContent = "上传成功！"
+
                         // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
                         // {
                         //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",

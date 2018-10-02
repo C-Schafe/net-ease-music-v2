@@ -32,50 +32,156 @@
 <body>
     <div class="dash-board">
         <header>
-            <div class="buttons">
+            <div class="window-actions">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <div class="logo-and-contacts">
                 <div class="logo">
-                    <h1>网易云音乐</h1>
+                    <svg class="icon beat" aria-hidden="true">
+                        <use xlink:href="#icon-beat1"></use>
+                    </svg>
+                    <h1>YourBeats</h1>
                 </div>
                 <div class="contacts">
-
+                    <span class="avatar">
+                        <img src="./assets/avatar.png" alt="" height="30px" width="30px">
+                        <span class="my-name">LouisChiang</span>
+                    </span>
+                    <span class="wechat">
+                        <svg class="icon wechat" aria-hidden="true">
+                            <use xlink:href="#icon-wechat"></use>
+                        </svg>
+                        <span>18219114350</span>
+                    </span>
+                    <span class="phone">
+                        <svg class="icon phone" aria-hidden="true">
+                            <use xlink:href="#icon-phone"></use>
+                        </svg>
+                        <span>18219114350</span>
+                    </span>
+                    <span class="mail">
+                        <svg class="icon mail" aria-hidden="true">
+                            <use xlink:href="#icon-mail"></use>
+                        </svg>
+                        <span>louisjiangmy@gmail.com</span>
+                    </span>
+                    <span class="blog">
+                        <svg class="icon blog" aria-hidden="true">
+                            <use xlink:href="#icon-blog"></use>
+                        </svg>
+                        <a href="https://www.jianshu.com/u/c2e786a7a188">Blog</a>
+                    </span>
+                    <span class="github">
+                        <svg class="icon github" aria-hidden="true">
+                            <use xlink:href="#icon-github"></use>
+                        </svg>
+                        <a href="https://github.com/C-Schafe">Github</a>
+                    </span>
                 </div>
             </div>
         </header>
         <div class="interaction">
-            <aside>
-                <div class="songList-container">
-
-                </div>
-                <div id="upload-song">
-                    <span id="upload-button">上传文件</span>
-                    <p id="state"></p>
-                </div>
-            </aside>
-            <main>
-                <div class="home-page hide">
-                    <div class="swiper">轮播图</div>
-                    <div class="welcome-words">
-                        <div class="logo">
-                            logo
-                        </div>
-                        <p>欢迎使用网易云音乐后台管理系统！</p>
-                    </div>
-                </div>
+            <div class="edit-song-area">
                 <div class="info-page hide">
 
                 </div>
                 <div class="new-song-detail">
-
+                    <h3>新建歌曲</h3>
+                    <form class="form">
+                        <div class="song-info">
+                            <div class="picture">
+                                <img src="" alt="">
+                            </div>
+                            <div class="left-rows">
+                                <div class="row">
+                                    <label>
+                                        歌名
+                                    </label>
+                                    <input type="text" name="name" value="__name__">
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        歌手
+                                    </label>
+                                    <input type="text" name="singer" value="__singer__">
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        外链
+                                    </label>
+                                    <input type="text" name="url" value="__url__">
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        封面
+                                    </label>
+                                    <input type="text" name="cover" value="__cover__">
+                                </div>
+                            </div>
+                            <div class="right-row">
+                                <div class="row">
+                                    <label>
+                                        歌词
+                                    </label>
+                                    <textarea name="lyrics" id="song-lyrics">__lyrics__</textarea>
+                                    <!--<input type="text" name="lyrics" value="__lyrics__">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row actions">
+                            <button type="submit">保存</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="upload-song">
-
+                <div class="upload-song hide">
+                    <h3>上传歌曲</h3>
+                    <div id="upload-song-area">
+                        拖曳歌曲到此处或点击 "选择文件" 上传歌曲
+                    </div>
+                    <div class="upload-button-wrapper">
+                        <span id="upload-button">选择文件</span>
+                    </div>
                 </div>
-            </main>
+            </div>
+            <div class="list-of-songs">
+                <div class="songList-container">
+                    <h3>歌曲列表</h3>
+                    <ul class="song-list">
+                        <li class="active">
+                            <a href="#">
+                                <svg class="icon play" aria-hidden="true">
+                                    <use xlink:href="#icon-play2"></use>
+                                </svg>
+                            </a>
+                            <div class="song">
+                                <div class="li-song-info">
+                                    <svg class="icon name" aria-hidden="true">
+                                        <use xlink:href="#icon-name"></use>
+                                    </svg>
+                                    <span class="song-name">歌名</span>
+                                    <svg class="icon singer" aria-hidden="true">
+                                        <use xlink:href="#icon-singer"></use>
+                                    </svg>
+                                    <span class="song-singer">歌手</span>
+                                </div>
+                                <div class="li-song-actions">
+                                    <svg class="icon edit" aria-hidden="true">
+                                        <use xlink:href="#icon-edit"></use>
+                                    </svg>
+                                    <svg class="icon delete" aria-hidden="true">
+                                        <use xlink:href="#icon-delete"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="new-song-wrapper">
+                <span class="new-song-button">新增歌曲</span>
+            </div>
         </div>
     </div>
 
@@ -88,10 +194,11 @@
     <script src="./js/qiniuMin.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="/eventHub.js"></script>
+    <script src="/svg.js"></script>
     <script src="/admin.js"></script>
     <script src="/newSong.js"></script>
-    <script src="/songForm.js"></script>
-    <script src="/songList.js"></script>
+    <!--<script src="/songForm.js"></script>-->
+    <!--<script src="/songList.js"></script>-->
     <script src="/uploadSong.js"></script>
     <!--<script src="../../vendors/moxie.js"></script>-->
     <script src="./js/moxie.js"></script>
