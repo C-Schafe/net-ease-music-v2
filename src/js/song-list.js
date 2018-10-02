@@ -12,8 +12,8 @@ console.log('song list');
             $(this.el).html(this.template)
             songs.map((song)=>{
                 $(this.el).find('.song-list').append(`
-                    <li class="active">
-                        <a href="#">
+                    <li song-data-id="${song.id}">
+                        <a href="${song.url}" target="_blank">
                             <svg class="icon play" aria-hidden="true">
                                 <use xlink:href="#icon-play2"></use>
                             </svg>
@@ -30,10 +30,10 @@ console.log('song list');
                                 <span class="song-singer">${song.singer}</span>
                             </div>
                             <div class="li-song-actions">
-                                <svg class="icon edit" aria-hidden="true">
+                                <svg id="edit" class="icon edit" aria-hidden="true">
                                     <use xlink:href="#icon-edit"></use>
                                 </svg>
-                                <svg class="icon delete" aria-hidden="true">
+                                <svg id="delete" class="icon delete" aria-hidden="true">
                                     <use xlink:href="#icon-delete"></use>
                                 </svg>
                             </div>
@@ -41,11 +41,15 @@ console.log('song list');
                     </li>
                 `)
             })
+        },
+        activeSelectedItem(data){
+            $(this.el).find(`[song-data-id=${data}]`).addClass('active').siblings().removeClass('active')
         }
     }
     let model = {
         data: {
-            songs:[]
+            songs:[],
+            selectedId: undefined
         },
         find(){
             let query = new AV.Query('Song')
@@ -74,6 +78,17 @@ console.log('song list');
             })
             this.model.find().then(()=>{
                 this.view.render(this.model.data)
+                this.view.activeSelectedItem(this.model.selectedId)
+                this.bindEvents()
+            })
+        },
+        bindEvents(){
+            console.log('song-list绑定事件');
+            console.log($(this.view.el))
+            $(this.view.el).find('.edit').on('click', (e)=>{
+                this.model.selectedId = $(e.currentTarget).parents('li').attr('song-data-id')
+                console.log(this.model.selectedId)
+                this.view.activeSelectedItem(this.model.selectedId)
             })
         }
     }
