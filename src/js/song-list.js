@@ -8,10 +8,10 @@ console.log('song list');
             <ul class="song-list"></ul>
         `,
         render(data){
-            let {songs} = data
+            let {songs, selectedId} = data
             $(this.el).html(this.template)
-            songs.map((song)=>{
-                $(this.el).find('.song-list').append(`
+            let liList = songs.map((song)=>{
+                let $li = $(`
                     <li song-data-id="${song.id}">
                         <a href="${song.url}" target="_blank">
                             <svg class="icon play" aria-hidden="true">
@@ -40,10 +40,14 @@ console.log('song list');
                         </div>
                     </li>
                 `)
+                if(song.id === selectedId){
+                    $li.addClass('active')
+                }
+                return $li
             })
-        },
-        activeSelectedItem(data){
-            $(this.el).find(`[song-data-id=${data}]`).addClass('active').siblings().removeClass('active')
+            liList.map((domLi)=>{
+                $(this.el).find('.song-list').append(domLi)
+            })
         }
     }
     let model = {
@@ -78,17 +82,31 @@ console.log('song list');
             })
             this.model.find().then(()=>{
                 this.view.render(this.model.data)
-                this.view.activeSelectedItem(this.model.selectedId)
                 this.bindEvents()
+                this.bindEventHub()
             })
         },
         bindEvents(){
-            console.log('song-list绑定事件');
-            console.log($(this.view.el))
-            $(this.view.el).find('.edit').on('click', (e)=>{
-                this.model.selectedId = $(e.currentTarget).parents('li').attr('song-data-id')
-                console.log(this.model.selectedId)
-                this.view.activeSelectedItem(this.model.selectedId)
+            $(this.view.el).on('click', '.edit', (e)=>{
+                let liId = $(e.currentTarget).parents('li').attr('song-data-id')
+                this.model.data.selectedId = liId
+                this.view.render(this.model.data)
+                let data
+                let {songs} = this.model.data
+                songs.map((song)=>{
+                    if(song.id === this.model.data.selectedId){
+                        data = song
+                    }
+                })
+                console.log('--------------');
+                console.log(JSON.parse(JSON.stringify(data)));
+                window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))
+            })
+        },
+        bindEventHub(){
+            window.eventHub.on('new', ()=>{
+                this.model.data.selectedId = undefined
+                this.view.render(this.model.data)
             })
         }
     }

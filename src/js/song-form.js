@@ -3,7 +3,6 @@ console.log('song form');
     let view = {
         el: '.new-song-detail',
         template: `
-            <h3>新建歌曲</h3>
                 <form class="form">
                     <div class="song-info">
                         <div class="picture">
@@ -57,9 +56,23 @@ console.log('song form');
                 htmlString = htmlString.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(htmlString)
+            this.toggleNewAndEdit(data.id)
         },
         reset(){
             this.render({})
+        },
+        show(){
+            $(this.el).removeClass('hide')
+        },
+        hide(){
+            $(this.el).addClass('hide')
+        },
+        toggleNewAndEdit(data){
+            if(data){
+                $(this.el).find('.form').prepend('<h3>编辑歌曲</h3>')
+            }else{
+                $(this.el).find('.form').prepend('<h3>新建歌曲</h3>')
+            }
         }
     }
     let model = {
@@ -126,10 +139,17 @@ console.log('song form');
         },
         bindEventHub(){
             window.eventHub.on('new', ()=>{
-                $(this.view.el).addClass('hide')
+                this.view.hide()
             })
             window.eventHub.on('upload', ()=>{
-                $(this.view.el).removeClass('hide')
+                this.view.show()
+            })
+            window.eventHub.on('select', (data)=>{
+                console.log('song-form接收到select事件');
+                console.log(data)
+                Object.assign(this.model.data, data)
+                this.view.show()
+                this.view.render(this.model.data)
             })
         }
     }

@@ -258,7 +258,7 @@ body {
         }
         .form {
           //border: 1px solid red;
-          padding-top: 20px;
+          //padding-top: 20px;
           //justify-content: space-between;
           width: 100%;
           .song-info {
@@ -266,6 +266,10 @@ body {
             flex-direction: row;
             align-items: flex-start;
             justify-content: space-between;
+          }
+          h3 {
+            padding: 9px 0;
+            margin-bottom: 10px;
           }
           .row.actions {
             display: flex;

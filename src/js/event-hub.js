@@ -1,5 +1,3 @@
-console.log('eventHub');
-
 window.eventHub = {
     events: {},
     on(event, fn){
@@ -9,9 +7,6 @@ window.eventHub = {
         this.events[event].push(fn)
     },
     emit(event, data){
-        console.log('eventHub emit执行');
-        console.log(event, data)
-        console.log(this.events)
         for(let key in this.events){
             if(event === key){
                 this.events[key].map((fn)=>{

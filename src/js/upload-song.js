@@ -17,6 +17,12 @@ console.log('upload song');
         },
         render(data){
             this.el.append(this.template)
+        },
+        show(){
+            $(this.el).removeClass('hide')
+        },
+        hide(){
+            $(this.el).addClass('hide')
         }
     }
     let model = {}
@@ -111,10 +117,13 @@ console.log('upload song');
         },
         bindEventHub(){
             window.eventHub.on('new', ()=>{
-                $(this.view.el).removeClass('hide')
+                this.view.show()
             })
             window.eventHub.on('upload', ()=>{
-                $(this.view.el).addClass('hide')
+                this.view.hide()
+            })
+            window.eventHub.on('select', ()=>{
+                this.view.hide()
             })
         }
 
