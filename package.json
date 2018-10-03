@@ -39,6 +39,7 @@
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
+    "alertifyjs": "^1.11.1",
     "jquery": "^3.3.1",
     "leancloud-storage": "^3.10.0",
     "moxie": "0.0.0",

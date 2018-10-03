@@ -25,9 +25,15 @@
             text-align: center;
             font-size: 14px;
         }
-
+        .alertify>.ajs-modal>.ajs-dialog{
+            margin-top: 300px;
+        }
     </style>
     <!--<link rel="stylesheet" href="../css/admin.scss">-->
+    <!-- include the style -->
+    <link rel="stylesheet" href="./css/alertify/alertify.min.css" />
+    <!-- include a theme -->
+    <link rel="stylesheet" href="./css/alertify/themes/default.min.css" />
 </head>
 <body>
     <div class="dash-board">
@@ -41,7 +47,7 @@
                 <div class="new-song-detail hide">
                 </div>
                 <div class="upload-song">
-                    <div class="loading"></div>
+
                 </div>
             </div>
             <div class="list-of-songs">
@@ -62,6 +68,7 @@
     <script src="./js/qiniuMin.js"></script>
     <script src="./js/jquery.min.js"></script>
     <!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="./js/alertify.min.js"></script>
     <script src="/eventHub.js"></script>
     <script src="/svg.js"></script>
     <script src="/header.js"></script>
@@ -70,6 +77,7 @@
     <script src="/songForm.js"></script>
     <script src="/songList.js"></script>
     <script src="/uploadSong.js"></script>
+    <script src="/loading.js"></script>
     <!--<script src="../../vendors/moxie.js"></script>-->
     <script src="./js/moxie.js"></script>
     <!--<script src="/moxie.js"></script>-->

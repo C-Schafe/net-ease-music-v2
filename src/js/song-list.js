@@ -8,6 +8,7 @@ console.log('song list');
             <ul class="song-list"></ul>
         `,
         render(data){
+            $(this.el).empty()
             let {songs, selectedId} = data
             $(this.el).html(this.template)
             let liList = songs.map((song)=>{
@@ -69,6 +70,15 @@ console.log('song list');
                     this.data.songs.push(songData)
                 })
             })
+        },
+        delete(data){
+            let song = AV.Object.createWithoutData('Song', data);
+            return song.destroy().then((success)=>{
+                // 删除成功
+                console.log('删除成功');
+            }, (error)=>{
+                // 删除失败
+            });
         }
     }
     let controller = {
@@ -98,14 +108,41 @@ console.log('song list');
                         data = song
                     }
                 })
-                console.log('--------------');
-                console.log(JSON.parse(JSON.stringify(data)));
                 window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))
+            })
+            $(this.view.el).on('click', '.delete', (e)=>{
+
+                alertify.confirm("警告!","确认删除此歌曲？",
+                        ()=>{
+                            alertify.success('成功删除');
+                            let liId = $(e.currentTarget).parents('li').attr('song-data-id')
+                            console.log(this.model.data);
+                            this.model.delete(liId).then((res)=>{
+                                console.log(res);
+                                this.model.data = {songs:[], selectedId: undefined}
+                                this.init(view,model)
+                            })
+                        },
+                        ()=>{
+                            alertify.error('取消');
+                        }).set('labels', {ok:'删除', cancel:'取消'}); ;
             })
         },
         bindEventHub(){
             window.eventHub.on('new', ()=>{
                 this.model.data.selectedId = undefined
+                this.view.render(this.model.data)
+            })
+            window.eventHub.on('update', (data)=>{
+                console.log(this.model.data);
+                let {songs} = this.model.data
+                let newSongs = songs.map((song)=>{
+                    if(song.id === data.id){
+                        song = data
+                    }
+                    return song
+                })
+                this.model.data.songs = newSongs
                 this.view.render(this.model.data)
             })
         }

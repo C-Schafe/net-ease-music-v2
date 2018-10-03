@@ -6,6 +6,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin'); // 添加在这里
 module.exports = {
     devtool: "source-map",
     entry: {
+        //PC管理界面的js文件
         admin: './src/js/admin.js',
         avMin: './src/js/vendors/av-min.js',
         moxie: './src/js/vendors/moxie.js',
@@ -18,7 +19,10 @@ module.exports = {
         uploadSong: './src/js/upload-song.js',
         av: './src/js/av.js',
         svg: './src/assets/svg.js',
-        header: './src/js/header.js'
+        header: './src/js/header.js',
+        loading: './src/js/loading.js',
+        //移动端界面的js
+        index: './src/js/index.js'
     },
     output: {
         filename: '[name].js',
@@ -38,8 +42,23 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'admin管理界面',
-            filename: 'index.html', // 处理后的 html 文件名称
+            filename: 'admin.html', // 处理后的 html 文件名称
             template: './src/html/admin.html', // 需要处理的 html 文件，即模板
+            chunks: ['']
+            //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
+            //chunksSortMode: 'manual',
+            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
+            //minify: { // html 压缩优化选项
+            //    removeComments: true, //移除 html 中的注释
+            //    // removeAttributeQuotes: true, // 移除属性的引号
+            //    // collapseWhitespace: true // 删除空白符与换行符，效果为将 html 全部压缩为一行
+            ///}
+        }),
+        new HtmlWebpackPlugin({
+            title: 'admin管理界面',
+            filename: 'index.html', // 处理后的 html 文件名称
+            template: './src/html/index.html', // 需要处理的 html 文件，即模板
             chunks: ['']
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
             //chunksSortMode: 'manual',

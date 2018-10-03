@@ -78,6 +78,7 @@ console.log('song form');
     let model = {
         data: { name:'',singer:'',url:'',id:'',lyrics:'',cover:''},
         create(data){
+            console.log('创建数据');
             // 声明类型
             let Song = AV.Object.extend('Song');
             // 新建对象
@@ -100,6 +101,17 @@ console.log('song form');
             }, (error)=>{
                 console.error(error);
             });
+        },
+        update(data){
+            console.log('更新数据');
+            // 第一个参数是 className，第二个参数是 objectId
+            var song = AV.Object.createWithoutData('Song', this.data.id);
+            // 修改属性
+            song.set('name', data.name);
+            song.set('singer', data.singer);
+            song.set('url', data.url);
+            // 保存到云端
+            return song.save();
         }
     }
     let controller = {
@@ -107,7 +119,6 @@ console.log('song form');
             this.view = view
             this.model = model
             this.view.render(this.model.data)
-            console.log('bindEvents打印的数据');
             this.bindEvents()
             this.bindEventHub()
             window.eventHub.on('upload', (data)=>{
@@ -128,13 +139,30 @@ console.log('song form');
                 needs.map((item)=>{
                     data[item] = $(this.view.el).find(`[name=${item}]`).val()
                 })
-                //收集数据后，在leancloud创建数据并显示在list
-                this.model.create(data).then(()=>{
-                    this.view.reset()
-                    let newSong = JSON.parse(JSON.stringify(this.model.data))
-                    console.log(newSong);
-                    window.eventHub.emit('save', newSong)
-                })
+                //收集数据后，判断是更新还是新建数据
+                if(this.model.data.id){
+                    this.model.update(data).then((res)=>{
+                        console.log('更新成功');
+                        console.log(res);
+                        Object.assign(data, {
+                            id: res.id,
+                            name: res.attributes.name,
+                            singer: res.attributes.singer,
+                            url: res.attributes.url
+                        })
+                        window.eventHub.emit('update', JSON.parse(JSON.stringify(data)))
+                        this.model.data = { name:'',singer:'',url:'',id:'',lyrics:'',cover:''}
+                        this.view.hide()
+                    })
+                }else {
+                    this.model.create(data).then(()=>{
+                        this.view.reset()
+                        let newSong = JSON.parse(JSON.stringify(this.model.data))
+                        console.log(newSong);
+                        window.eventHub.emit('save', newSong)
+                        this.model.data = { name:'',singer:'',url:'',id:'',lyrics:'',cover:''}
+                    })
+                }
             })
         },
         bindEventHub(){
@@ -146,10 +174,13 @@ console.log('song form');
             })
             window.eventHub.on('select', (data)=>{
                 console.log('song-form接收到select事件');
-                console.log(data)
                 Object.assign(this.model.data, data)
                 this.view.show()
                 this.view.render(this.model.data)
+                console.log(this.model.data);
+            })
+            window.eventHub.on('save', ()=>{
+                this.view.hide()
             })
         }
     }

@@ -80,6 +80,7 @@ console.log('upload song');
                     },
                     'BeforeUpload': function(up, file) {
                         // 每个文件上传前,处理相关的事情
+                        window.eventHub.emit('beforeUpload')
                     },
                     'UploadProgress': function(up, file) {
 
@@ -92,7 +93,7 @@ console.log('upload song');
                         //    "key": "gogopher.jpg"
                         //  }
                         // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
-
+                        window.eventHub.emit('afterUpload')
                         var domain = up.getOption('domain');
                         var res = JSON.parse(info.response);
                         var sourceLink = 'http://' +  domain + '/' + encodeURIComponent(res.key); //获取上传成功后的文件的Url
@@ -124,6 +125,12 @@ console.log('upload song');
             })
             window.eventHub.on('select', ()=>{
                 this.view.hide()
+            })
+            window.eventHub.on('update', ()=>{
+                this.view.show()
+            })
+            window.eventHub.on('save', ()=>{
+                this.view.show()
             })
         }
 
