@@ -65,7 +65,9 @@ console.log('song list');
                         id: song.id,
                         name: song.attributes.name,
                         singer: song.attributes.singer,
-                        url: song.attributes.url
+                        url: song.attributes.url,
+                        cover: song.attributes.cover,
+                        lyrics: song.attributes.lyrics
                     }
                     this.data.songs.push(songData)
                 })

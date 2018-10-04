@@ -88,6 +88,8 @@ console.log('song form');
             // 设置优先级
             song.set('singer',data.singer);
             song.set('url',data.url);
+            song.set('cover',data.cover);
+            song.set('lyrics',data.lyrics);
             return song.save().then((res)=>{
                 console.log(res);
                 let {id, attributes} = res
@@ -96,7 +98,9 @@ console.log('song form');
                     id,
                     name: attributes.name,
                     singer: attributes.singer,
-                    url: attributes.url
+                    url: attributes.url,
+                    cover: attributes.cover,
+                    lyrics: attributes.lyrics
                 })
             }, (error)=>{
                 console.error(error);
@@ -110,6 +114,8 @@ console.log('song form');
             song.set('name', data.name);
             song.set('singer', data.singer);
             song.set('url', data.url);
+            song.set('cover',data.cover);
+            song.set('lyrics',data.lyrics);
             // 保存到云端
             return song.save();
         }
@@ -134,7 +140,7 @@ console.log('song form');
             $(this.view.el).on('submit', 'form', (e)=>{
                 //点击保存后收集form中的数据
                 e.preventDefault()
-                let needs = 'name singer url'.split(' ')
+                let needs = 'name singer url cover lyrics'.split(' ')
                 let data = {}
                 needs.map((item)=>{
                     data[item] = $(this.view.el).find(`[name=${item}]`).val()
@@ -148,7 +154,9 @@ console.log('song form');
                             id: res.id,
                             name: res.attributes.name,
                             singer: res.attributes.singer,
-                            url: res.attributes.url
+                            url: res.attributes.url,
+                            cover: res.attributes.cover,
+                            lyrics: res.attributes.lyrics
                         })
                         window.eventHub.emit('update', JSON.parse(JSON.stringify(data)))
                         this.model.data = { name:'',singer:'',url:'',id:'',lyrics:'',cover:''}

@@ -22,7 +22,15 @@ module.exports = {
         header: './src/js/header.js',
         loading: './src/js/loading.js',
         //移动端界面的js
-        index: './src/js/index.js'
+        mobileSvg: './src/assets/mobile-svg.js',
+        index: './src/js/index.js',
+        indexTabItems: "./src/js/index-tabItems.js",
+        indexPlayLists: "./src/js/index-playLists.js",
+        indexLatestMusic: "./src/js/index-latestMusic.js",
+        tabHotList: "./src/js/tab-hotList.js",
+        tabSearch: "./src/js/tab-search.js",
+        song: "./src/js/song.js",
+        recommend: "./src/js/recommend.js"
     },
     output: {
         filename: '[name].js',
@@ -56,9 +64,39 @@ module.exports = {
             ///}
         }),
         new HtmlWebpackPlugin({
-            title: 'admin管理界面',
+            title: '移动端首页',
             filename: 'index.html', // 处理后的 html 文件名称
             template: './src/html/index.html', // 需要处理的 html 文件，即模板
+            chunks: ['']
+            //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
+            //chunksSortMode: 'manual',
+            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
+            //minify: { // html 压缩优化选项
+            //    removeComments: true, //移除 html 中的注释
+            //    // removeAttributeQuotes: true, // 移除属性的引号
+            //    // collapseWhitespace: true // 删除空白符与换行符，效果为将 html 全部压缩为一行
+            ///}
+        }),
+        new HtmlWebpackPlugin({
+            title: '移动端播放页',
+            filename: 'song.html', // 处理后的 html 文件名称
+            template: './src/html/song.html', // 需要处理的 html 文件，即模板
+            chunks: ['']
+            //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
+            //chunksSortMode: 'manual',
+            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
+            //minify: { // html 压缩优化选项
+            //    removeComments: true, //移除 html 中的注释
+            //    // removeAttributeQuotes: true, // 移除属性的引号
+            //    // collapseWhitespace: true // 删除空白符与换行符，效果为将 html 全部压缩为一行
+            ///}
+        }),
+        new HtmlWebpackPlugin({
+            title: '移动端推荐歌单页',
+            filename: 'recommend.html', // 处理后的 html 文件名称
+            template: './src/html/recommend.html', // 需要处理的 html 文件，即模板
             chunks: ['']
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
             //chunksSortMode: 'manual',
@@ -105,7 +143,7 @@ module.exports = {
                     loader:'url-loader',
                     options: {
                         limit:8192,
-                        name:'../assets/[hash:8].[name].[ext]'
+                        name:'../assets/[name].[ext]'
                     }
                 },{
                     loader: 'image-webpack-loader',// 压缩图片
