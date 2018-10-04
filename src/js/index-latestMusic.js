@@ -17,7 +17,12 @@
                     <li>
                         <a href="./song.html?id=${song.id}">
                             <h3>${song.name}</h3>
-                            <p>${song.singer}</p>
+                            <p class="singer">
+                                <svg class="icon sq" aria-hidden="true">
+                                    <use xlink:href="#icon-sq"></use>
+                                </svg>
+                                ${song.singer}
+                            </p>
                             <a href="#">
                                 <svg class="icon play-circled" aria-hidden="true">
                                   <use xlink:href="#icon-play-circle-big"></use>
@@ -28,6 +33,14 @@
                 `)
                 $(this.el).find('ol').append($li)
             })
+        },
+        hideLoading(){
+            console.log('hideLoading执行');
+            console.log($(this.el).find('.loading'));
+            $(this.el).find('.loading').addClass('hide')
+        },
+        showLoading(){
+            $(this.el).find('.loading').removeClass('hide')
         }
     }
     let model = {
@@ -58,8 +71,9 @@
             this.model = model
             this.view.render(model.data)
             this.model.find().then(()=>{
-                console.log(this.model.data);
+
                 this.view.render(this.model.data)
+                this.view.hideLoading()
             })
         }
     }

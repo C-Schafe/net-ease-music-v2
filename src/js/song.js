@@ -31,18 +31,14 @@ import  songCss from '../css/song.scss'
                     url: song.attributes.url
                 }
                 Object.assign(this.data.songData, songData)
-                console.log(this.data.songData);
                 return song
-            }, (error)=>{
-                // 异常处理
-            });
+            }, (error)=>{console.log(error);});
         }
     }
     let controller = {
         init(){
             this.view = view
             this.model = model
-            //this.view.render(this.model.data)
             this.getSongId()
             this.model.getSongData(this.model.data.songData.id).then(()=>{
                 this.view.render(this.model.data)

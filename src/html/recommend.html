@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推荐歌单</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<body>
+<header class="pylst-header">
+    <div class="img-container">
+        <img src="./assets/playlist.jpg" alt="">
+        <span class="songlst-tag">歌单</span>
+        <svg class="icon icon-earphone" aria-hidden="true">
+            <use xlink:href="#icon-earphone"></use>
+        </svg>
+        <span class="play-data">32315</span>
+    </div>
+    <div class="pylst-name">
+        <h3>午睡民谣</h3>
+        <a href="#" class="creater">
+            <div class="profile-pic"></div>
+            师大公园地上司令
+        </a>
+    </div>
+</header>
+<section class="pylst-intro">
+    <div class="tags">
+        标签：
+        <span>华语</span>
+        <span>流行</span>
+    </div>
+    <div class="list-description">介绍：只是个人爱好</div>
+</section>
+<section class="pylst">
+    <p>歌曲列表</p>
+    <ol id="songList">
+
+    </ol>
+</section>
+<footer class="collect">
+
+    <a href="#">
+        <svg>
+            <use xlink:href="#icon-netease"></use>
+        </svg>
+        收藏歌单
+    </a>
+</footer>
+<script src="//cdn1.lncld.net/static/js/3.6.0/av-min.js"></script>
+<script src="/av.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="/mobileSvg.js"></script>
+<script src="/eventHub.js"></script>
+<script src="/recommend.js"></script>
+
+</body>
+</html>

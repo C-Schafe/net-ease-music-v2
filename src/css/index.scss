@@ -115,7 +115,11 @@ p.loading {
 .latestMusic{}
 .latestMusic>.loading {
   text-align: center;
+  &.hide {
+    display: none;
+  }
 }
+
 .latestMusic>ol {
   padding-left: 2.5vw;
 }
@@ -147,6 +151,11 @@ p.loading {
   right: 2vw;
   top: 50%;
   transform: translateY(-50%);
+}
+.latestMusic p.singer {
+  display: flex;
+  align-items: flex-end;
+  font-size: 12px;
 }
 .latestMusic .icon.sq {
   fill: #fe672e;
