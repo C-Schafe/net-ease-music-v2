@@ -68,7 +68,7 @@ module.exports = {
             title: '网易云音乐',
             filename: '../html/index.html', // 处理后的 html 文件名称
             template: './src/html/index.html', // 需要处理的 html 文件，即模板
-            chunks: ['mobileSvg','eventHub','index','indexTabItems','tabHotList','tabSearch'],
+            chunks: ['av','mobileSvg','eventHub','index','indexTabItems','tabHotList','tabSearch'],
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
             chunksSortMode: 'manual',
             inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置

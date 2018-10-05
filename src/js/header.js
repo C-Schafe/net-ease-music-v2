@@ -16,7 +16,7 @@
                 </div>
                 <div class="contacts">
                     <span class="avatar">
-                        <img src="./assets/avatar.png" alt="" height="30px" width="30px">
+                        <img src="../assets/avatar.png" alt="" height="30px" width="30px">
                         <span class="my-name">LouisChiang</span>
                     </span>
                     <span class="wechat">

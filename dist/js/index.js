@@ -742,7 +742,7 @@ console.log('index模块加载完毕');
         },
         loadPlayLists: function loadPlayLists() {
             var playLists = document.createElement('script');
-            playLists.src = '/indexPlayLists.js';
+            playLists.src = '../js/indexPlayLists.js';
             playLists.onload = function () {
                 console.log('推荐歌单模块加载完毕');
             };
@@ -750,7 +750,7 @@ console.log('index模块加载完毕');
         },
         loadLatestMusic: function loadLatestMusic() {
             var latestMusic = document.createElement('script');
-            latestMusic.src = '/indexLatestMusic.js';
+            latestMusic.src = '../js/indexLatestMusic.js';
             latestMusic.onload = function () {
                 console.log('最新音乐模块加载完毕');
             };
