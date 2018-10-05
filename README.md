@@ -2,8 +2,8 @@
 这是一个仿网易云音乐的项目，支持 PC 端后台进行歌曲管理和使用移动端播放音乐
 
 ## 预览连接
-* 移动端播放页面
-* PC 端管理页面
+* [移动端播放页面](https://c-schafe.github.io/net-ease-music-v2/dist/html/index.html)
+* [PC 端管理页面](https://c-schafe.github.io/net-ease-music-v2/dist/html/admin.html)
 
 ## 技术栈
 该项目包括 PC 端后台管理页面 以及 移动端播放页面，项目主要涉及到的技术有：
