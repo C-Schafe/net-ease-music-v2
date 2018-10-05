@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 15:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -113,7 +113,9 @@ console.log('song list');
                         id: song.id,
                         name: song.attributes.name,
                         singer: song.attributes.singer,
-                        url: song.attributes.url
+                        url: song.attributes.url,
+                        cover: song.attributes.cover,
+                        lyrics: song.attributes.lyrics
                     };
                     _this2.data.songs.push(songData);
                 });
@@ -197,6 +199,7 @@ console.log('song list');
                     return song;
                 });
                 _this5.model.data.songs = newSongs;
+                _this5.model.data.selectedId = undefined;
                 _this5.view.render(_this5.model.data);
             });
         }

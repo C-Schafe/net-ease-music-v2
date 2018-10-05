@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73,18 +73,35 @@
 
 {
     var view = {
-        el: 'header',
-        template: '\n            <div class="window-actions">\n                <span></span>\n                <span></span>\n                <span></span>\n            </div>\n            <div class="logo-and-contacts">\n                <div class="logo">\n                    <svg class="icon beat" aria-hidden="true">\n                        <use xlink:href="#icon-beat1"></use>\n                    </svg>\n                    <h1>YourBeats</h1>\n                </div>\n                <div class="contacts">\n                    <span class="avatar">\n                        <img src="./assets/avatar.png" alt="" height="30px" width="30px">\n                        <span class="my-name">LouisChiang</span>\n                    </span>\n                    <span class="wechat">\n                        <svg class="icon wechat" aria-hidden="true">\n                            <use xlink:href="#icon-wechat"></use>\n                        </svg>\n                        <span>18219114350</span>\n                    </span>\n                    <span class="phone">\n                        <svg class="icon phone" aria-hidden="true">\n                            <use xlink:href="#icon-phone"></use>\n                        </svg>\n                        <span>18219114350</span>\n                    </span>\n                    <span class="mail">\n                        <svg class="icon mail" aria-hidden="true">\n                            <use xlink:href="#icon-mail"></use>\n                        </svg>\n                        <span>louisjiangmy@gmail.com</span>\n                    </span>\n                    <span class="blog">\n                        <svg class="icon blog" aria-hidden="true">\n                            <use xlink:href="#icon-blog"></use>\n                        </svg>\n                        <a href="https://www.jianshu.com/u/c2e786a7a188">Blog</a>\n                    </span>\n                    <span class="github">\n                        <svg class="icon github" aria-hidden="true">\n                            <use xlink:href="#icon-github"></use>\n                        </svg>\n                        <a href="https://github.com/C-Schafe">Github</a>\n                    </span>\n                </div>\n            </div>\n        ',
+        el: '.siteNav',
+        template: '\n            <ol class="tabItems">\n                <li class="active" tab-name="tab1"><span>\u63A8\u8350\u97F3\u4E50</span></li>\n                <li tab-name="tab2"><span>\u70ED\u6B4C\u699C</span></li>\n                <li tab-name="tab3"><span>\u641C\u7D22</span></li>\n            </ol>\n        ',
         render: function render(data) {
-            $(this.el).append(this.template);
+            $(this.el).html(this.template);
+        },
+        activeItem: function activeItem(itemName, item) {
+            if (itemName === $(item).attr('tab-name')) {
+                $(this.el).find('[tab-name=' + itemName + ']').addClass('active').siblings().removeClass('active');
+            }
         }
     };
     var model = {};
     var controller = {
-        init: function init() {
+        init: function init(view, model) {
             this.view = view;
             this.model = model;
-            this.view.render();
+            this.view.render(model.data);
+            this.bindEvents();
+        },
+        bindEvents: function bindEvents() {
+            var _this = this;
+
+            $(this.view.el).on('click', 'li', function (e) {
+                var $li = $(e.currentTarget);
+                console.log($li);
+                var tabName = $li.attr('tab-name');
+                _this.view.activeItem(tabName, $li);
+                window.eventHub.emit('selectTab', tabName);
+            });
         }
     };
     controller.init(view, model);
@@ -93,4 +110,4 @@
 /***/ })
 
 /******/ });
-//# sourceMappingURL=header.js.map
+//# sourceMappingURL=indexTabItems.js.map

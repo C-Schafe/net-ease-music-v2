@@ -60,46 +60,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 15:
+/***/ 36:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-console.log('new song');
-
-{
-    var view = {
-        el: '.new-song-wrapper',
-        template: '\n            <span class="new-song-button">\u65B0\u589E\u6B4C\u66F2</span>\n        ',
-        render: function render(data) {
-            $(this.el).append(this.template);
-        }
-    };
-    var model = {};
-    var controller = {
-        init: function init(view, model) {
-            this.view = view;
-            this.model = model;
-            this.view.render();
-            this.bindEvents();
-        },
-        bindEvents: function bindEvents() {
-            $(this.view.el).find('.new-song-button').on('click', function () {
-                console.log('新增歌曲被点击');
-                window.eventHub.emit('new');
-            });
-        }
-    };
-    controller.init(view, model);
-}
-
 /***/ })
 
 /******/ });
-//# sourceMappingURL=newSong.js.map
+//# sourceMappingURL=indexPlayLists.js.map

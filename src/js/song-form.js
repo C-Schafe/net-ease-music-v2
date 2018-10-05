@@ -73,6 +73,9 @@ console.log('song form');
             }else{
                 $(this.el).find('.form').prepend('<h3>新建歌曲</h3>')
             }
+        },
+        setCover(cover){
+            $(this.el).find('img').attr('src', cover)
         }
     }
     let model = {
@@ -182,10 +185,12 @@ console.log('song form');
             })
             window.eventHub.on('select', (data)=>{
                 console.log('song-form接收到select事件');
+                console.log(data);
                 Object.assign(this.model.data, data)
                 this.view.show()
                 this.view.render(this.model.data)
                 console.log(this.model.data);
+                this.view.setCover(this.model.data.cover)
             })
             window.eventHub.on('save', ()=>{
                 this.view.hide()

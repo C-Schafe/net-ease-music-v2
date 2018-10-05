@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 14:
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -102,6 +102,9 @@ console.log('song form');
             } else {
                 $(this.el).find('.form').prepend('<h3>新建歌曲</h3>');
             }
+        },
+        setCover: function setCover(cover) {
+            $(this.el).find('img').attr('src', cover);
         }
     };
     var model = {
@@ -119,6 +122,8 @@ console.log('song form');
             // 设置优先级
             song.set('singer', data.singer);
             song.set('url', data.url);
+            song.set('cover', data.cover);
+            song.set('lyrics', data.lyrics);
             return song.save().then(function (res) {
                 console.log(res);
                 var id = res.id,
@@ -129,7 +134,9 @@ console.log('song form');
                     id: id,
                     name: attributes.name,
                     singer: attributes.singer,
-                    url: attributes.url
+                    url: attributes.url,
+                    cover: attributes.cover,
+                    lyrics: attributes.lyrics
                 });
             }, function (error) {
                 console.error(error);
@@ -143,6 +150,8 @@ console.log('song form');
             song.set('name', data.name);
             song.set('singer', data.singer);
             song.set('url', data.url);
+            song.set('cover', data.cover);
+            song.set('lyrics', data.lyrics);
             // 保存到云端
             return song.save();
         }
@@ -171,7 +180,7 @@ console.log('song form');
             $(this.view.el).on('submit', 'form', function (e) {
                 //点击保存后收集form中的数据
                 e.preventDefault();
-                var needs = 'name singer url'.split(' ');
+                var needs = 'name singer url cover lyrics'.split(' ');
                 var data = {};
                 needs.map(function (item) {
                     data[item] = $(_this3.view.el).find('[name=' + item + ']').val();
@@ -185,7 +194,9 @@ console.log('song form');
                             id: res.id,
                             name: res.attributes.name,
                             singer: res.attributes.singer,
-                            url: res.attributes.url
+                            url: res.attributes.url,
+                            cover: res.attributes.cover,
+                            lyrics: res.attributes.lyrics
                         });
                         window.eventHub.emit('update', JSON.parse(JSON.stringify(data)));
                         _this3.model.data = { name: '', singer: '', url: '', id: '', lyrics: '', cover: '' };
@@ -213,10 +224,12 @@ console.log('song form');
             });
             window.eventHub.on('select', function (data) {
                 console.log('song-form接收到select事件');
+                console.log(data);
                 Object.assign(_this4.model.data, data);
                 _this4.view.show();
                 _this4.view.render(_this4.model.data);
                 console.log(_this4.model.data);
+                _this4.view.setCover(_this4.model.data.cover);
             });
             window.eventHub.on('save', function () {
                 _this4.view.hide();

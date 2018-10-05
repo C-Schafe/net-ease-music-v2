@@ -145,7 +145,9 @@ console.log('song list');
                     return song
                 })
                 this.model.data.songs = newSongs
+                this.model.data.selectedId = undefined
                 this.view.render(this.model.data)
+
             })
         }
     }

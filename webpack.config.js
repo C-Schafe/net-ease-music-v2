@@ -6,13 +6,14 @@ let HtmlWebpackPlugin = require('html-webpack-plugin'); // 添加在这里
 module.exports = {
     devtool: "source-map",
     entry: {
+        //公共chunk
+        eventHub: './src/js/event-hub.js',
         //PC管理界面的js文件
         admin: './src/js/admin.js',
         avMin: './src/js/vendors/av-min.js',
         moxie: './src/js/vendors/moxie.js',
         qiniuMin: './src/js/vendors/qiniu.min.js',
         plupLoadMin: './src/js/vendors/plupload.min.js',
-        eventHub: './src/js/event-hub.js',
         newSong: './src/js/new-song.js',
         songForm: './src/js/song-form.js',
         songList: './src/js/song-list.js',
@@ -49,13 +50,13 @@ module.exports = {
             alwaysNotify: true
         }),
         new HtmlWebpackPlugin({
-            title: 'admin管理界面',
-            filename: 'admin.html', // 处理后的 html 文件名称
+            title: 'Admin管理界面',
+            filename: '../html/admin.html', // 处理后的 html 文件名称
             template: './src/html/admin.html', // 需要处理的 html 文件，即模板
-            chunks: ['']
+            chunks: ['av','qiniuMin','eventHub','svg','header','admin','newSong','songForm','songList','uploadSong','loading'],
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
-            //chunksSortMode: 'manual',
-            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            chunksSortMode: 'manual',
+            inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
             //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
             //minify: { // html 压缩优化选项
             //    removeComments: true, //移除 html 中的注释
@@ -64,13 +65,13 @@ module.exports = {
             ///}
         }),
         new HtmlWebpackPlugin({
-            title: '移动端首页',
-            filename: 'index.html', // 处理后的 html 文件名称
+            title: '网易云音乐',
+            filename: '../html/index.html', // 处理后的 html 文件名称
             template: './src/html/index.html', // 需要处理的 html 文件，即模板
-            chunks: ['']
+            chunks: ['mobileSvg','eventHub','index','indexTabItems','tabHotList','tabSearch'],
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
-            //chunksSortMode: 'manual',
-            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            chunksSortMode: 'manual',
+            inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
             //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
             //minify: { // html 压缩优化选项
             //    removeComments: true, //移除 html 中的注释
@@ -79,13 +80,13 @@ module.exports = {
             ///}
         }),
         new HtmlWebpackPlugin({
-            title: '移动端播放页',
-            filename: 'song.html', // 处理后的 html 文件名称
+            title: '网易云音乐',
+            filename: '../html/song.html', // 处理后的 html 文件名称
             template: './src/html/song.html', // 需要处理的 html 文件，即模板
-            chunks: ['']
+            chunks: ['av','mobileSvg','song'],
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
-            //chunksSortMode: 'manual',
-            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            chunksSortMode: 'manual',
+            inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
             //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
             //minify: { // html 压缩优化选项
             //    removeComments: true, //移除 html 中的注释
@@ -94,13 +95,13 @@ module.exports = {
             ///}
         }),
         new HtmlWebpackPlugin({
-            title: '移动端推荐歌单页',
-            filename: 'recommend.html', // 处理后的 html 文件名称
+            title: '网易云音乐',
+            filename: '../html/recommend.html', // 处理后的 html 文件名称
             template: './src/html/recommend.html', // 需要处理的 html 文件，即模板
-            chunks: ['']
+            chunks: ['av','mobileSvg','eventHub','recommend'],
             //chunks: ['eventsHub', 'index', 'contactMe', 'pageNav', 'pageContainer', 'pageRemd', 'pageHottop', 'pagePlay', 'searchBox', 'searchHottop', 'searchResult'], // chunks，即该 html 模板中需要引入的 js，名称与上面 entry 中的 key 一致则表示引入
-            //chunksSortMode: 'manual',
-            //inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
+            chunksSortMode: 'manual',
+            inject: 'body', // 布尔值或者 ‘body‘、’head’，设置 script 引入的位置
             //hash: true, // chunk 的 hash 值，若为 true，则默认在 chunk 文件后面添加 “？ + hash”
             //minify: { // html 压缩优化选项
             //    removeComments: true, //移除 html 中的注释
